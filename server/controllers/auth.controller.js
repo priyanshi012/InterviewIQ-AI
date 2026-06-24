@@ -13,9 +13,7 @@ export const googleAuth = async(req,res)=>{
       })
     }
     const token = await genToken(user._id)
-    //  if (!token) {
-    //   return res.status(500).json({ message: "Failed to generate token" })
-    // }
+ 
     res.cookie("token",token,{
       httpOnly:true,
       secure:false,
