@@ -109,8 +109,8 @@ export const generateQuestion = (async(req,res)=>{
 if(!user){
   return res.status(404).json({message:"User not found."})
 }
-
-    if(user.credits<50){
+//change
+    if(user.credits<10){
       return res.status(400).json({message:"Not enough credits Minimum 50 required. "})
     }
 
@@ -176,25 +176,29 @@ Make questions based on the candidate's role, experience,interviewMode, projects
  const aiResponse = await askAi(messages)
   
 if(!aiResponse || !aiResponse.trim()){
+  console.log("AI returned empty response")
  return res.status(500).json({message:"AI returned empty response"});
 }
 
 const questionsArray = aiResponse.split("\n").map(q=>q.trim()).filter(q=> q.length >0).slice(0,5)
 
 if(questionsArray.length===0){
+  console.log("AI failed to generate questions");
   return res.status(500).json({message:"AI failed to generate questions."});
 }
-user.credits -= 50;
+//change
+user.credits -= 10;
 await user.save()
 
 const interview = await Interview.create({
   userId:user._id,
   role,
   mode,
+  experience,
   resumeText:safeResume,
   questions:questionsArray.map((q,index)=>({
     question:q,
-    difficuly: ["easy","easy","medium","medium","hard"][index],
+    difficulty: ["easy","easy","medium","medium","hard"][index],
     timeLimit: [60,60,90,90,120][index],
 
   }  ))
@@ -208,6 +212,7 @@ res.json({
 
 
   } catch (error) {
+    console.log(error)
     return res.status(500).json({message:`failed to create interview ${error}`})
   }
 })
@@ -304,12 +309,14 @@ Answer: ${answer}
     question.correctness = parsed.correctness;
     question.score = parsed.finalScore;
     question.feedback = parsed.feedback;
+    question.confidence = parsed.confidence;
 
     await interview.save();
 
    return res.status(200).json({feedback:parsed.feedback})
 
   } catch (error) {
+    console.log(error)
     return res.status(500).json({message:`failed to submit answer ${error}`})
     
   }
@@ -335,7 +342,7 @@ export const finishInterview = async(req,res)=>{
   let totalCommunication =0;
   let totalCorrectness =0;
 
-  interview.question.array.forEach((q) => {
+  interview.questions.forEach((q) => {
     totalScore += q.score || 0;
     totalConfidence += q.confidence||0;
     totalCommunication += q.communication||0;
@@ -372,6 +379,7 @@ return res.status(200).json({
 })
 
   } catch (error) {
+    console.log(error)
     return res.status(500).json({message:`failed to finish interview ${error}`})
   }
 }
