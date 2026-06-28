@@ -110,7 +110,7 @@ if(!user){
   return res.status(404).json({message:"User not found."})
 }
 //change
-    if(user.credits<1){
+    if(user.credits<50){
       return res.status(400).json({message:"Not enough credits Minimum 50 required. "})
     }
 
@@ -187,7 +187,7 @@ if(questionsArray.length===0){
   return res.status(500).json({message:"AI failed to generate questions."});
 }
 //change
-user.credits -= 1;
+user.credits -= 50;
 await user.save()
 
 const interview = await Interview.create({
