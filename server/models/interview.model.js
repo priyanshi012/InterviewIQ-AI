@@ -50,7 +50,7 @@ resumeText:{
 
 
 
-},{timesStamps:true})
+},{timestamps:true})
 
 const Interview = mongoose.model("Interview",interviewSchema)
 
