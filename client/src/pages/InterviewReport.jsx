@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { serverUrl } from '../App';
+import Step3Report from '../components/step3Report';
 function interviewReport() {
   const {id} = useParams()
   const [report,setReport] = useState(null);
@@ -11,7 +12,7 @@ function interviewReport() {
       try {
         const result = await axios.get(serverUrl + "/api/interview/report/" + id , {withCredentials:true})
           console.log(result.data)
-          stepReport(result.data)
+          setReport(result.data)
       } catch (error) {
         console.log(error)
       }
@@ -29,7 +30,7 @@ function interviewReport() {
           );
       }
 
-  return <step3Report report={report}/>
+  return <Step3Report report={report}/>
 }
 
 export default interviewReport
