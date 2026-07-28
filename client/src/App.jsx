@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Auth from './pages/Auth'
-import InterviewPage from './pages/interviewPage'
+import InterviewPage from './pages/InterviewPage'
 import { useEffect } from 'react'
 
 import axios from 'axios'
@@ -11,7 +11,7 @@ import {useDispatch} from 'react-redux'
 import Pricing from './pages/Pricing'
 import InterviewHistory from './pages/interviewHistory'
 
-import InterviewReport from './pages/interviewReport'
+import InterviewReport from './pages/InterviewReport'
 
 export const serverUrl = "https://interviewiq-ai-xnri.onrender.com"
 function App() {
