@@ -232,7 +232,7 @@ const submitAnswer = async ()=>{
   stopMic()
   setIsSubmitting(true)
   try {
-    const result = await axios.post(serverUrl + "/api/Interview/submit-answer" , {
+    const result = await axios.post(serverUrl + "/api/interview/submit-answer" , {
       interviewId,
       questionIndex:currentIndex,
       answer,
@@ -266,7 +266,7 @@ const handleNext = async ()=>{
   stopMic()
   setIsMicOn(false)
   try {
-    const result = await axios.post(serverUrl + "/api/Interview/finish" ,{interviewId}, {withCredentials:true})
+    const result = await axios.post(serverUrl + "/api/interview/finish" ,{interviewId}, {withCredentials:true})
 
     console.log(result.data)
     onFinish(result.data)

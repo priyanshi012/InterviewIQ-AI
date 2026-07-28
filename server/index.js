@@ -10,7 +10,11 @@ dotenv.config()
 
 const app = express()
 app.use(cors({
-  origin:"http://localhost:5173",
+ 
+  origin: [
+  "http://localhost:5173",
+  "https://interviewiq-ai-1-roeq.onrender.com"
+],
   credentials:true
 }))
 //change

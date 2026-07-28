@@ -13,7 +13,7 @@ import InterviewHistory from './pages/interviewHistory'
 
 import InterviewReport from './pages/interviewReport'
 
-export const serverUrl = "http://localhost:8000"
+export const serverUrl = "https://interviewiq-backend-mb1b.onrender.com"
 function App() {
   const dispatch = useDispatch()
   useEffect(()=>{

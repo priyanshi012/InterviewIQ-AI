@@ -12,7 +12,7 @@ from "react-icons/fa"
 import { setUserData } from '../redux/userSlice';
 import axios from 'axios'
 import {useDispatch,useSelector} from 'react-redux'
-const serverUrl = "http://localhost:8000";
+const serverUrl = "https://interviewiq-backend-mb1b.onrender.com";
 function Step1SetUp({onStart}) {
   const {userData} = useSelector((state)=>state.user)
   const dispatch = useDispatch()
