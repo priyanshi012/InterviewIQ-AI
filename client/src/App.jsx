@@ -13,7 +13,7 @@ import InterviewHistory from './pages/interviewHistory'
 
 import InterviewReport from './pages/InterviewReport'
 
-export const serverUrl = "https://interviewiq-ai-xnri.onrender.com"
+export const serverUrl = "https://interviewiq-backend-mb1b.onrender.com"
 function App() {
   const dispatch = useDispatch()
   useEffect(()=>{
